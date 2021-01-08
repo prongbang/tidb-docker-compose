@@ -1,0 +1,14 @@
+version: '3.6'
+services: 
+    tidb:
+      image: pingcap/tidb:latest
+      ports:
+        - "4000:4000"
+        - "10080:10080"
+      volumes:
+        - ./config/tidb.toml:/tidb.toml:ro
+        - ./logs:/logs
+      command:
+        - --config=/tidb.toml
+        - --log-file=/logs/tidb.log
+      restart: on-failure
